@@ -1,4 +1,4 @@
-import { createSlice } from "react-redux";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
   { id: 1, title: "This is test title" },
@@ -11,6 +11,4 @@ export const postSlice = createSlice({
   reducers: {},
 });
 
-const postReducer = postSlice.reducer();
-
-export default postReducer;
+export default postSlice.reducer;
