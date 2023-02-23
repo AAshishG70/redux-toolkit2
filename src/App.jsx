@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "./features/users/userSlice";
 
 const App = () => {
   const { users, posts } = useSelector((state) => state);
-
+  const dispatch = useDispatch();
   return (
     <div>
       {users.map((user) => (
@@ -11,6 +12,9 @@ const App = () => {
       {posts.map((post) => (
         <h3 key={post.id}>{post.title}</h3>
       ))}
+      <button onClick={() => dispatch(addUser({ id: 4, name: "Rushali" }))}>
+        Add User
+      </button>
     </div>
   );
 };
