@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "./features/users/userSlice";
+import { addUser } from "./features/users/user-slice";
 
 const App = () => {
   const { users, posts } = useSelector((state) => state);
