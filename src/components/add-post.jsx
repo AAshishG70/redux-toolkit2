@@ -3,8 +3,10 @@ const AddPost = () => {
     <section>
       <h2>Add a Post</h2>
       <label htmlFor="postTitle">Title: </label>
-      <input type="text" id="postTitle" value="postTitle" />
-      <select htmlFor="postAuthor">Author: </select>
+      <input type="text" id="postTitle" value="postTitle" placeholder="Title" />
+      <br />
+      <label htmlFor="postAutor">Author:</label>
+      <select htmlFor="postAuthor"> </select>
       <option value=""></option>
       <label htmlFor="postContent">Content: </label>
       <textarea id="postContent" value="postContent" />
