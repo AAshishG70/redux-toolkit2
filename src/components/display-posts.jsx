@@ -7,7 +7,9 @@ import TimeAgo from "./display-components/time-ago";
 const DisplayPosts = () => {
   const posts = useSelector(selectAllPosts);
 
-  const orderedLists = posts.slice().sort((a, b) => b.localCompare(a));
+  const orderedLists = posts
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date));
   console.log(orderedLists);
 
   const renderedPosts = orderedLists.map((post) => (

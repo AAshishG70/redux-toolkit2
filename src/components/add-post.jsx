@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost } from "../features/posts/post-slice";
 import { selectAllUsers } from "../features/users/user-slice";
 
 const AddPost = () => {
   const users = useSelector(selectAllUsers);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  const [title, setTitle] = useState();
-  const [userId, setUserId] = useState();
-  const [content, setContent] = useState();
+  const [title, setTitle] = useState("");
+  const [userId, setUserId] = useState("");
+  const [content, setContent] = useState("");
 
   const submitHandler = () => {
     if (title && content && userId) {
+      dispatch(addPost(title, content, userId));
+      // console.log(`Title: ${title} Content: ${content} User Id: ${userId}`);
       setTitle("");
       setUserId("");
       setContent("");
@@ -49,7 +52,7 @@ const AddPost = () => {
           placeholder=" Content "
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
-        <button type="button" onSubmit={submitHandler}>
+        <button type="button" onClick={submitHandler}>
           Save Post
         </button>
       </form>
