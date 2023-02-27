@@ -45,11 +45,16 @@ export const postSlice = createSlice({
         };
       },
     },
+    addReaction(state, action) {
+      const { postId, reaction } = action.payload;
+      const availablePost = state.find((post) => postId === post.id);
+      availablePost && availablePost.reactions[reaction]++;
+    },
   },
 });
 
 export const selectAllPosts = (state) => state.posts;
 
-export const { addPost } = postSlice.actions;
+export const { addPost, addReaction } = postSlice.actions;
 
 export default postSlice.reducer;

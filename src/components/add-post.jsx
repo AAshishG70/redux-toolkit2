@@ -13,6 +13,7 @@ const AddPost = () => {
 
   const submitHandler = () => {
     if (title && content && userId) {
+      console.log(typeof userId);
       dispatch(addPost(title, content, userId));
       // console.log(`Title: ${title} Content: ${content} User Id: ${userId}`);
       setTitle("");
