@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { selectAllUsers } from "../features/users/user-slice";
 
 const AddPost = () => {
-  const dispatch = useDispatch();
+  const users = useSelector(selectAllUsers);
+  // const dispatch = useDispatch();
 
   const [title, setTitle] = useState();
   const [userId, setUserId] = useState();
@@ -16,34 +18,38 @@ const AddPost = () => {
     }
   };
 
+  const userOptions = users.map((user) => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ));
+
   return (
     <section>
-      <h2>Add a New Post</h2>
+      <h2>Add a Post</h2>
       <form>
-        <label htmlFor="postTitle">Post Title: </label>
+        <label htmlFor="postTitle">Title: </label>
         <input
           type="text"
           id="postTitle"
           name="postTitle"
           value={title}
+          placeholder=" Title "
           onChange={(e) => setTitle(e.target.value)}
         />
-        <label htmlFor="postAuthor">Author:</label>
-        <select
-          id="postAuthor"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-        >
+        <label htmlFor="postAuthor">Author: </label>
+        <select id="postAuthor" onChange={(e) => setUserId(e.target.value)}>
           <option value=""></option>
+          {userOptions}
         </select>
         <label htmlFor="postContent">Content: </label>
         <textarea
-          id="postContent"
           name="postContent"
-          value={content}
+          id="postContent"
+          placeholder=" Content "
           onChange={(e) => setContent(e.target.value)}
-        />
-        <button type="button" onClick={submitHandler}>
+        ></textarea>
+        <button type="button" onSubmit={submitHandler}>
           Save Post
         </button>
       </form>
