@@ -1,19 +1,32 @@
-import { PostAuthor } from "./display-components/post-author";
-import { TimeAgo } from "./display-components/time-ago";
+import { useSelector } from "react-redux";
+import { selectAllPosts } from "../features/posts/post-slice";
+import PostAuthor from "./display-components/post-author";
+import ReactionButtons from "./display-components/reaction-buttons";
+import TimeAgo from "./display-components/time-ago";
 
-const DisplayPosts = ({ posts }) => {
+const DisplayPosts = () => {
+  const posts = useSelector(selectAllPosts);
+
   const orderedLists = posts.slice().sort((a, b) => b.localCompare(a));
-  const renderedLists = orderedLists.map((post) => {
-    <section>
-      <h2>{post.title}</h2>
-      <p>{post.content.subString(0, 100)}</p>
+  console.log(orderedLists);
+
+  const renderedPosts = orderedLists.map((post) => (
+    <article key={post.id}>
+      <h3>{post.title}</h3>
+      <p>{post.content.substring(0, 100)}</p>
       <p className="postCredit">
         <PostAuthor userId={post.userId} />
         <TimeAgo timestamp={post.date} />
       </p>
-    </section>;
-  });
-  return <option>{renderedLists}</option>;
+      <ReactionButtons post={post} />
+    </article>
+  ));
+  return (
+    <section>
+      <h2>Posts</h2>
+      {renderedPosts}
+    </section>
+  );
 };
 
 export default DisplayPosts;
