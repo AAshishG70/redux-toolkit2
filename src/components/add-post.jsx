@@ -1,11 +1,16 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../features/posts/post-slice";
-import { selectAllUsers } from "../features/users/user-slice";
+import { fetchUser, selectAllUsers } from "../features/users/user-slice";
 
 const AddPost = () => {
   const users = useSelector(selectAllUsers);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, []);
 
   const [title, setTitle] = useState("");
   const [userId, setUserId] = useState("");
@@ -13,7 +18,6 @@ const AddPost = () => {
 
   const submitHandler = () => {
     if (title && content && userId) {
-      console.log(typeof userId);
       dispatch(addPost(title, content, userId));
       // console.log(`Title: ${title} Content: ${content} User Id: ${userId}`);
       setTitle("");

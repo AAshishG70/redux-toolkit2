@@ -10,7 +10,6 @@ const DisplayPosts = () => {
   const orderedLists = posts
     .slice()
     .sort((a, b) => b.date.localeCompare(a.date));
-  console.log(orderedLists);
 
   const renderedPosts = orderedLists.map((post) => (
     <article key={post.id}>
