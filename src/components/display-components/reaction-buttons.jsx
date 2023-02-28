@@ -18,7 +18,7 @@ const ReactionButtons = ({ post }) => {
         type="button"
         className="reactionButton"
         onClick={() =>
-          dispatch(() => addReaction({ postId: post.id, reaction: name }))
+          dispatch(addReaction({ postId: post.id, reaction: name }))
         }
       >
         {emoji} {post.reactions[name]}
