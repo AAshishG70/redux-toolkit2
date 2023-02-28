@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import { sub } from "date-fns";
 
 const initialState = [
@@ -17,6 +17,15 @@ const initialState = [
     },
   },
 ];
+
+export const sendPosts = createAsyncThunk(
+  "posts/addPosts",
+  async function (post) {
+    const response = await axios.post(POST_URL, post);
+    console.log(response);
+    return response.data;
+  }
+);
 
 export const postSlice = createSlice({
   name: "posts",
@@ -50,6 +59,12 @@ export const postSlice = createSlice({
       const availablePost = state.find((post) => postId === post.id);
       availablePost && availablePost.reactions[reaction]++;
     },
+  },
+
+  extraReducers(builder) {
+    builder.addCase(sendPosts.fulfilled, (state, action) => {
+      state.posts.push(action.payload);
+    });
   },
 });
 

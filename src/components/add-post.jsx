@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../features/posts/post-slice";
+import { addPost, sendPosts } from "../features/posts/post-slice";
 import { fetchUser, selectAllUsers } from "../features/users/user-slice";
 
 const AddPost = () => {
@@ -19,6 +19,7 @@ const AddPost = () => {
   const submitHandler = () => {
     if (title && content && userId) {
       dispatch(addPost(title, content, userId));
+      dispatch(sendPosts({ title, body: content, userId }));
       // console.log(`Title: ${title} Content: ${content} User Id: ${userId}`);
       setTitle("");
       setUserId("");
