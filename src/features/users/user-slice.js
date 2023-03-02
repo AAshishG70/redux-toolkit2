@@ -4,6 +4,7 @@ import { USERS_URL } from "../../constant/constant";
 
 const initialState = {
   users: [],
+  status: "idle",
 };
 
 export const fetchUser = createAsyncThunk("users/fetchUser", async () => {
@@ -19,9 +20,14 @@ export const userSlice = createSlice({
     builder
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.users.push(...action.payload);
+        state.status == "Successful";
       })
-      .addCase(fetchUser.pending, (state, action) => {})
-      .addCase(fetchUser.rejected, (state, action) => {});
+      .addCase(fetchUser.pending, (state, action) => {
+        state.status == "Pending";
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.status == "Failed";
+      });
   },
 });
 

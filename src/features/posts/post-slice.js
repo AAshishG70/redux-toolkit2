@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import { sub } from "date-fns";
+import { POST_URL } from "../../constant/constant";
+import axios from "axios";
 
 const initialState = [
   {
@@ -22,7 +24,17 @@ export const sendPosts = createAsyncThunk(
   "posts/addPosts",
   async function (post) {
     const response = await axios.post(POST_URL, post);
+    // const response = await fetch(POST_URL, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(post),
+    // });
+
+    // const data = await response.json();
+
+    // console.log("Posted data", data);
     console.log(response);
+
     return response.data;
   }
 );
